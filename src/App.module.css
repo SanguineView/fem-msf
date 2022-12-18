@@ -1,0 +1,10 @@
+.App {
+    background:#fff;
+    padding:15px;
+    border-radius:14px;
+    box-shadow: 5px 5px 5px hsl(231, 11%, 93%);
+    width:940px;
+    display:grid;
+    grid-template-columns: 275px 1fr;
+}
+

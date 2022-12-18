@@ -1,0 +1,58 @@
+.StepsContainer {
+    min-height:570px;
+    background:url('./assets/images/bg-sidebar-desktop.svg') center center no-repeat;
+    background-size:cover;
+    padding:20px;
+    border-radius:12px;
+}
+
+.Step {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-gap:15px;
+    margin-bottom:30px;
+}
+
+.StepNum {
+    border:1px solid hsl(231, 100%, 99%);
+    border-radius: 50%;
+    color:hsl(231, 100%, 99%);
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width:30px;
+    height:30px;
+    transition: all 0.3s ease;
+}
+
+.StepNumActive {
+    border-color:hsl(206, 94%, 87%);
+    background:hsl(206, 94%, 87%);
+    color:hsl(213, 96%, 18%);
+}
+
+.StepDetails {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.StepDetails p {
+    font-family: 'ubuntuRegular';
+    font-size:12px;
+    text-transform: uppercase;
+    margin:0;
+    line-height: 100%;
+}
+
+.StepDetails .StepOrder {
+    color:hsl(228, 100%, 84%);
+    margin-bottom:5px;
+}
+
+.StepDetails .StepLabel {
+    color:hsl(231, 100%, 99%);
+    font-size:14px;
+    font-family: 'ubuntuMedium';
+    letter-spacing: 1px;
+}
