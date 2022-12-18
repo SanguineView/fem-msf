@@ -47,7 +47,12 @@ const DetailPanelTwo = (props) => {
                     <div className={s.DetailsPlanSelect}>
                         <img className={s.DetailsPlanIcon} src='./assets/images/icon-arcade.svg' alt='Arcade' />
                         <p className={s.DetailsPlanLabel}>Arcade</p>
-                        {props.plan.payYearly ? <><p className={s.DetailsPlanPrice}>$90/year</p><p className={s.DetailsPlanPriceNote}>2 Months Free</p></> : <p className={s.DetailsPlanPrice}>$9/mo</p>}
+                        {props.plan.payYearly ? (
+                            <>
+                                <p className={s.DetailsPlanPrice}>$90/year</p>
+                                <p className={s.DetailsPlanPriceNote}>2 Months Free</p>
+                            </>
+                        ) : <p className={s.DetailsPlanPrice}>$9/mo</p>}
                     </div>
                 </label>
                 <label className={s.DetailsPlanCheckboxLabel} aria-label='Advanced'>
@@ -55,7 +60,12 @@ const DetailPanelTwo = (props) => {
                     <div className={s.DetailsPlanSelect}>
                         <img className={s.DetailsPlanIcon} src='./assets/images/icon-advanced.svg' alt='Advanced' />
                         <p className={s.DetailsPlanLabel}>Advanced</p>
-                        {props.plan.payYearly ? <><p className={s.DetailsPlanPrice}>$120/year</p><p className={s.DetailsPlanPriceNote}>2 Months Free</p></> : <p className={s.DetailsPlanPrice}>$12/mo</p>}
+                        {props.plan.payYearly ? (
+                            <>
+                                <p className={s.DetailsPlanPrice}>$120/year</p>
+                                <p className={s.DetailsPlanPriceNote}>2 Months Free</p>
+                            </>
+                        ) : <p className={s.DetailsPlanPrice}>$12/mo</p>}
                     </div>
                 </label>
                 <label className={s.DetailsPlanCheckboxLabel} aria-label='Pro'>
@@ -63,7 +73,12 @@ const DetailPanelTwo = (props) => {
                     <div className={s.DetailsPlanSelect}>
                         <img className={s.DetailsPlanIcon} src='./assets/images/icon-pro.svg' alt='Pro' />
                         <p className={s.DetailsPlanLabel}>Pro</p>
-                        {props.plan.payYearly ? <><p className={s.DetailsPlanPrice}>$150/year</p><p className={s.DetailsPlanPriceNote}>2 Months Free</p></> : <p className={s.DetailsPlanPrice}>$15/mo</p>}
+                        {props.plan.payYearly ? ( 
+                            <>
+                                <p className={s.DetailsPlanPrice}>$150/year</p>
+                                <p className={s.DetailsPlanPriceNote}>2 Months Free</p>
+                            </>
+                        ) : <p className={s.DetailsPlanPrice}>$15/mo</p> }
                     </div>
                 </label>
             </div>
@@ -82,40 +97,40 @@ const DetailPanelThree = (props) => {
         <>
             <h2 className={s.DetailsHeading}>Pick add-ons</h2>
             <p className={s.DetailsCopy}>Add-ons help enhance your gaming experience.</p>
-            <div className={s.DetailsAddsOption}>
-                <label className={s.DetailsAddsLabel} aria-label='Online Service'>
-                    <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addona' checked={props.plan.addona} onChange={props.onChangeAddOnA} />
-                </label>  
-                <div className={s.DetailsAddsSelect}>
+            <label className={s.DetailsAddsLabel} aria-label='Online Service'>
+                <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addona' checked={props.plan.addona} onChange={props.onChangeAddOnA} />
+                <div className={s.DetailsAddsOption}> 
+                    <div className={s.DetailsAddsSelect}>
                         <p className={s.DetailsAddsLabel}>Online service</p>
                         <p className={s.DetailsAddsInfo}>Access to multiplayer games</p>
+                    </div>
+                    <p className={s.DetailsAddsPrice}>+$1/mo</p>
                 </div>
-                <p className={s.DetailsAddsPrice}>+$1/mo</p>
-            </div>
+            </label> 
 
 
-            <div className={s.DetailsAddsOption}>
-                <label className={s.DetailsAddsLabel} aria-label='Online Service'>
-                    <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonb' checked={props.plan.addonb} onChange={props.onChangeAddOnB} />
-                </label>  
-                <div className={s.DetailsAddsSelect}>
+            <label className={s.DetailsAddsLabel} aria-label='Larger storage'>
+                <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonb' checked={props.plan.addonb} onChange={props.onChangeAddOnB} />
+                <div className={s.DetailsAddsOption}>
+                    <div className={s.DetailsAddsSelect}>
                         <p className={s.DetailsAddsLabel}>Larger storage</p>
                         <p className={s.DetailsAddsInfo}>Extra 1TB of cloud save</p>
+                    </div>
+                    <p className={s.DetailsAddsPrice}>+$2/mo</p>
                 </div>
-                <p className={s.DetailsAddsPrice}>+$2/mo</p>
-            </div>
+            </label>  
 
 
-            <div className={s.DetailsAddsOption}>
-                <label className={s.DetailsAddsLabel} aria-label='Customizable Profile'>
-                    <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonc' checked={props.plan.addonc} onChange={props.onChangeAddOnC} />
-                </label>
-                <div className={s.DetailsAddsSelect}>
-                    <p className={s.DetailsAddsLabel}>Customizable Profile</p>
-                    <p className={s.DetailsAddsInfo}>Custom theme on your profile</p>
+            <label className={s.DetailsAddsLabel} aria-label='Customizable Profile'>
+                <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonc' checked={props.plan.addonc} onChange={props.onChangeAddOnC} />
+                <div className={s.DetailsAddsOption}>
+                    <div className={s.DetailsAddsSelect}>
+                        <p className={s.DetailsAddsLabel}>Customizable Profile</p>
+                        <p className={s.DetailsAddsInfo}>Custom theme on your profile</p>
+                    </div>
+                    <p className={s.DetailsAddsPrice}>+$2/mo</p>
                 </div>
-                <p className={s.DetailsAddsPrice}>+$2/mo</p>
-            </div>
+            </label>
 
 
         </>

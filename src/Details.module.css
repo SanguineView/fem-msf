@@ -189,11 +189,35 @@ input:checked + .toggle .toggle__handler {
 }
 
 /* ADD ON LEVELS */
-
+.DetailsAddsLabel{
+    position: relative;
+    margin-bottom:15px;
+}
+.DetailsAddsLabel:last-of-type {
+    margin-bottom: 0;
+}
+.DetailsAddsCheckbox{
+    position: absolute;
+    left: -999em;
+}
 .DetailsAddsOption {
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap:10px;
+    border: 1px solid hsl(231, 11%, 63%);
+    border-radius: 6px;
+    margin-bottom:15px;
+    transition: all 0.3s ease;
+}
+.DetailsAddsOption:hover {
+    border-color: hsl(243, 100%, 62%);
+    cursor:  pointer;
+}
+.DetailsAddsCheckbox:checked+ .DetailsAddsOption {
+    border-color: hsl(243, 100%, 62%);
+    background:hsl(217, 100%, 97%);
+}
+.DetailsAddsOption {
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
 }
 
 /* prev / next buttons */
