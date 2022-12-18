@@ -1,16 +1,13 @@
-import { useState } from 'react'
-
 import s from './Details.module.css'
 
 const Details = (props) => {
-    const [details, setDetails] = useState([])
 
     return (
         <>
             <div className={s.DetailsContainer}>
                 { props.curStep === 1 && <DetailPanelOne plan={props.plan}/> }
-                { props.curStep === 2 && <DetailPanelTwo plan={props.plan} onChangeYearly={props.onChangeYearly}/> }
-                { props.curStep === 3 && <DetailPanelThree plan={props.plan} /> }
+                { props.curStep === 2 && <DetailPanelTwo plan={props.plan} onChangeYearly={props.onChangeYearly} onChangeLevel={props.onChangeLevel}/> }
+                { props.curStep === 3 && <DetailPanelThree plan={props.plan} onChangeAddOnA={props.onChangeAddOnA} onChangeAddOnB={props.onChangeAddOnB} onChangeAddOnC={props.onChangeAddOnC} /> }
                 { props.curStep === 4 && <DetailPanelFour plan={props.plan} /> }
                 <div className={s.DetailsButtons}>
                     { props.curStep > 1 && <button className={s.prevButton} onClick={props.onStepDecreseClick}>Go Back</button> }
@@ -45,34 +42,34 @@ const DetailPanelTwo = (props) => {
             <h2 className={s.DetailsHeading}>Select your plan</h2>
             <p className={s.DetailsCopy}>You have the option of monthly or yearly billing.</p>
             <div className={s.DetailsPlanOptions}>
-                <label className={s.DetailsPlanCheckboxLabel}>
-                    <input type="radio" className={s.DetailsPlanCheckbox} name='planSelection' value='1'/>
+                <label className={s.DetailsPlanCheckboxLabel} aria-label='Arcade'>
+                    <input type="radio" className={s.DetailsPlanCheckbox} value='1' checked={parseInt(props.plan.level) === 1} onChange={props.onChangeLevel} />
                     <div className={s.DetailsPlanSelect}>
                         <img className={s.DetailsPlanIcon} src='./assets/images/icon-arcade.svg' alt='Arcade' />
                         <p className={s.DetailsPlanLabel}>Arcade</p>
-                        <p className={s.DetailsPlanPrice}>{props.plan.payYearly ? '$90' : '$9'}/mo</p>
+                        {props.plan.payYearly ? <><p className={s.DetailsPlanPrice}>$90/year</p><p className={s.DetailsPlanPriceNote}>2 Months Free</p></> : <p className={s.DetailsPlanPrice}>$9/mo</p>}
                     </div>
                 </label>
-                <label className={s.DetailsPlanCheckboxLabel}>
-                    <input type="radio" className={s.DetailsPlanCheckbox} name='planSelection' value='2'/>
+                <label className={s.DetailsPlanCheckboxLabel} aria-label='Advanced'>
+                    <input type="radio" className={s.DetailsPlanCheckbox} value='2' checked={parseInt(props.plan.level) === 2} onChange={props.onChangeLevel}/>
                     <div className={s.DetailsPlanSelect}>
                         <img className={s.DetailsPlanIcon} src='./assets/images/icon-advanced.svg' alt='Advanced' />
                         <p className={s.DetailsPlanLabel}>Advanced</p>
-                        <p className={s.DetailsPlanPrice}>{props.plan.payYearly ? '$120' : '$12'}/mo</p>
+                        {props.plan.payYearly ? <><p className={s.DetailsPlanPrice}>$120/year</p><p className={s.DetailsPlanPriceNote}>2 Months Free</p></> : <p className={s.DetailsPlanPrice}>$12/mo</p>}
                     </div>
                 </label>
-                <label className={s.DetailsPlanCheckboxLabel}>
-                    <input type="radio" className={s.DetailsPlanCheckbox} name='planSelection' value='3'/>
+                <label className={s.DetailsPlanCheckboxLabel} aria-label='Pro'>
+                    <input type="radio" className={s.DetailsPlanCheckbox} value='3' checked={parseInt(props.plan.level) === 3} onChange={props.onChangeLevel}/>
                     <div className={s.DetailsPlanSelect}>
                         <img className={s.DetailsPlanIcon} src='./assets/images/icon-pro.svg' alt='Pro' />
                         <p className={s.DetailsPlanLabel}>Pro</p>
-                        <p className={s.DetailsPlanPrice}>{props.plan.payYearly ? '$150' : '$15'}/mo</p>
+                        {props.plan.payYearly ? <><p className={s.DetailsPlanPrice}>$150/year</p><p className={s.DetailsPlanPriceNote}>2 Months Free</p></> : <p className={s.DetailsPlanPrice}>$15/mo</p>}
                     </div>
                 </label>
             </div>
             <div className={s.toggleWrapper}>
                 <input type="checkbox" className={s.dn} id="dn" onChange={props.onChangeYearly} checked={props.plan.payYearly}/>
-                <label htmlFor="dn" className={s.toggle}>
+                <label htmlFor="dn" className={s.toggle} aria-label='Yearly'>
                     <span className={s.toggle__handler}></span>
                 </label>
             </div>
@@ -80,11 +77,47 @@ const DetailPanelTwo = (props) => {
     )
 }
 
-const DetailPanelThree = () => {
+const DetailPanelThree = (props) => {
     return (
         <>
             <h2 className={s.DetailsHeading}>Pick add-ons</h2>
             <p className={s.DetailsCopy}>Add-ons help enhance your gaming experience.</p>
+            <div className={s.DetailsAddsOption}>
+                <label className={s.DetailsAddsLabel} aria-label='Online Service'>
+                    <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addona' checked={props.plan.addona} onChange={props.onChangeAddOnA} />
+                </label>  
+                <div className={s.DetailsAddsSelect}>
+                        <p className={s.DetailsAddsLabel}>Online service</p>
+                        <p className={s.DetailsAddsInfo}>Access to multiplayer games</p>
+                </div>
+                <p className={s.DetailsAddsPrice}>+$1/mo</p>
+            </div>
+
+
+            <div className={s.DetailsAddsOption}>
+                <label className={s.DetailsAddsLabel} aria-label='Online Service'>
+                    <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonb' checked={props.plan.addonb} onChange={props.onChangeAddOnB} />
+                </label>  
+                <div className={s.DetailsAddsSelect}>
+                        <p className={s.DetailsAddsLabel}>Larger storage</p>
+                        <p className={s.DetailsAddsInfo}>Extra 1TB of cloud save</p>
+                </div>
+                <p className={s.DetailsAddsPrice}>+$2/mo</p>
+            </div>
+
+
+            <div className={s.DetailsAddsOption}>
+                <label className={s.DetailsAddsLabel} aria-label='Customizable Profile'>
+                    <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonc' checked={props.plan.addonc} onChange={props.onChangeAddOnC} />
+                </label>
+                <div className={s.DetailsAddsSelect}>
+                    <p className={s.DetailsAddsLabel}>Customizable Profile</p>
+                    <p className={s.DetailsAddsInfo}>Custom theme on your profile</p>
+                </div>
+                <p className={s.DetailsAddsPrice}>+$2/mo</p>
+            </div>
+
+
         </>
     )
 }

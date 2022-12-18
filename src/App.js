@@ -5,7 +5,17 @@ import Steps from './Steps';
 import Details from './Details'
 
 function App() {
-  const [plan, setPlan] = useState({payYearly:false})
+  const [plan, setPlan] = useState(
+    {
+      name:'',
+      email:'',
+      phone:'',
+      payYearly:true,
+      level:2,
+      addona: false,
+      addonb: false,
+      addonc: false,
+    })
   const [step, setStep] = useState(1)
   const increseStep = () => {
     setStep(s => s + 1)
@@ -23,17 +33,54 @@ function App() {
     })
   }
 
-  const handlePlanChange = () => {
+  const handleLevelChange = (e) => {
     setPlan((plan) => {
       return {
-        ...plan
+        ...plan,
+        level:e.target.value
       }
     })
   }
+
+  const handleAOAChange = () => {
+    setPlan((plan) => {
+      return {...plan, 
+      addona:!plan.addona
+      }
+    })
+  }
+
+  const handleAOBChange = () => {
+    setPlan((plan) => {
+      return {...plan, 
+      addonb:!plan.addonb
+      }
+    })
+  }
+
+  const handleAOCChange = () => {
+    setPlan((plan) => {
+      return {...plan, 
+      addonc:!plan.addonc
+      }
+    })
+  }
+
+  console.log(plan)
   return (
     <div className={s.App}>
         <Steps curStep={step} />
-        <Details curStep={step} onStepIncreseClick={increseStep} onStepDecreseClick={decreseStep} plan={plan} onChangeYearly={handleYearlyChange}/>
+        <Details
+          curStep={step}
+          plan={plan}
+          onStepIncreseClick={increseStep}
+          onStepDecreseClick={decreseStep}
+          onChangeYearly={handleYearlyChange}
+          onChangeLevel={handleLevelChange}
+          onChangeAddOnA={handleAOAChange}
+          onChangeAddOnB={handleAOBChange}
+          onChangeAddOnC={handleAOCChange}
+        />
     </div>
   );
 }
