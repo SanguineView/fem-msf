@@ -2,9 +2,20 @@
     background:#fff;
     padding:15px;
     border-radius:14px;
-    box-shadow: 5px 5px 5px hsl(231, 11%, 93%);
+    box-shadow: 5px 5px 20px hsl(231, 11%, 93%);
     width:940px;
     display:grid;
     grid-template-columns: 275px 1fr;
+}
+
+@media (max-width:1400px) {
+    .App {
+        background:none;
+        display: block;
+        padding:0;
+        width:100%;
+        max-width: 100%;
+        border-radius:0;
+    }
 }
 

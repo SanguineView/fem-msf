@@ -2,9 +2,8 @@ import s from './Steps.module.css'
 
 const Steps = (props) => {
     const handleChange = (e) => {
-        props.onStepChange(parseInt(e.target.value))
-    }
-    console.log(`current step is ${props.curStep}`)
+			props.onStepChange(parseInt(e.target.value))
+		}
     return (
         <div className={s.StepsContainer}>
             <label className={s.StepItemLabel} aria-label='Step 1 - Your Info'>

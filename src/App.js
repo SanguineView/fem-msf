@@ -14,9 +14,13 @@ function App() {
   const decreseStep = () => {
     setStep(s => s - 1)
   }
-  const jumpStep = (step) => {
-    setStep(step)
-  }
+  const jumpStep = (newStep) => {
+		if (step > 4) {
+			setStep(5)
+			return
+		}
+		setStep(newStep)
+	}
   return (
     <div className={s.App}>
         <Steps
