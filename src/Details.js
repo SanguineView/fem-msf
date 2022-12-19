@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import s from './Details.module.css'
 
 const Details = (props) => {
-    const [fees, setFees] = useState([])
+    const [total, setTotal] = useState(0)
     const [plan, setPlan] = useState(
     {
       name:'',
@@ -30,8 +30,7 @@ const Details = (props) => {
         if (plan.payYearly) {
             newTotal = newTotal * 10
         }
-        console.log(`The total: ${newTotal}`)
-        setFees([...fees])
+        setTotal(newTotal)
     }, [plan])
 
     const handleYearlyChange = () => {
@@ -101,7 +100,7 @@ const Details = (props) => {
                 { props.curStep === 1 && <DetailPanelOne plan={plan}/> }
                 { props.curStep === 2 && <DetailPanelTwo plan={plan} onChangeYearly={handleYearlyChange} onChangeLevel={handleLevelChange}/> }
                 { props.curStep === 3 && <DetailPanelThree plan={plan} onChangeAddOnA={handleAOAChange} onChangeAddOnB={handleAOBChange} onChangeAddOnC={handleAOCChange} /> }
-                { props.curStep === 4 && <DetailPanelFour plan={plan} /> }
+                { props.curStep === 4 && <DetailPanelFour plan={plan} total={total} /> }
                 <div className={s.DetailsButtons}>
                     { props.curStep > 1 && <button className={s.prevButton} onClick={props.onStepDecreseClick}>Go Back</button> }
                     { props.curStep < 4 && <button className={s.nextButton} onClick={props.onStepIncreseClick}>Next Step</button> }
@@ -201,8 +200,6 @@ const DetailPanelThree = (props) => {
                     <p className={s.DetailsAddsPrice}>+$1/mo</p>
                 </div>
             </label> 
-
-
             <label className={s.DetailsAddsLabel} aria-label='Larger storage'>
                 <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonb' checked={props.plan.addonb} onChange={props.onChangeAddOnB} />
                 <div className={s.DetailsAddsOption}>
@@ -214,8 +211,6 @@ const DetailPanelThree = (props) => {
                     <p className={s.DetailsAddsPrice}>+$2/mo</p>
                 </div>
             </label>  
-
-
             <label className={s.DetailsAddsLabel} aria-label='Customizable Profile'>
                 <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonc' checked={props.plan.addonc} onChange={props.onChangeAddOnC} />
                 <div className={s.DetailsAddsOption}>
@@ -227,17 +222,71 @@ const DetailPanelThree = (props) => {
                     <p className={s.DetailsAddsPrice}>+$2/mo</p>
                 </div>
             </label>
-
-
         </>
     )
 }
 
-const DetailPanelFour = () => {
+const DetailPanelFour = (props) => {
     return (
         <>
             <h2 className={s.DetailsHeading}>Finishing up</h2>
             <p className={s.DetailsCopy}>Double-check everything looks OK before confirming.</p>
+            <div className={s.DetailsSummary}>
+                <div className={s.DetailsSummaryItem}>
+                    <p className={s.DetailsSummaryItemLabel}>
+                        {props.plan.level == 1 && 'Arcade'}
+                        {props.plan.level == 2 && 'Advanced'}
+                        {props.plan.level == 3 && 'Pro'}
+                        {props.plan.payYearly ? ` (Yearly)` : ` (Monthyly)`}
+                    </p>
+                    <p className={s.DetailsSummaryItemFee}>
+                        ${props.plan.levelFee}
+                        {props.plan.payYearly ? `/Yr` : `/Mo`}</p>
+                </div>
+                {(props.plan.addona || props.plan.addonb || props.plan.addonc) && <hr/> }
+                { props.plan.addona && (
+                <div className={s.DetailsSummaryItem}>
+                    <p className={s.DetailsSummaryItemLabel}>
+                        {props.plan.addona && 'Online service'}
+                    </p>
+                    <p className={s.DetailsSummaryItemFee}>
+                        ${props.plan.aoafee}
+                        {props.plan.payYearly ? `/Yr` : `/Mo`}
+                    </p>
+                </div>
+                )}
+                { props.plan.addonb && (
+                <div className={s.DetailsSummaryItem}>
+                    <p className={s.DetailsSummaryItemLabel}>
+                        {props.plan.addonb && 'Larger storage'}
+                    </p>
+                    <p className={s.DetailsSummaryItemFee}>
+                        ${props.plan.aobfee}
+                        {props.plan.payYearly ? `/Yr` : `/Mo`}
+                    </p>
+                </div>
+                )}
+                { props.plan.addonc && (
+                <div className={s.DetailsSummaryItem}>
+                    <p className={s.DetailsSummaryItemLabel}>
+                        {props.plan.addonc && 'Customizable Profile'}
+                    </p>
+                    <p className={s.DetailsSummaryItemFee}>
+                        ${props.plan.aocfee}
+                        {props.plan.payYearly ? `/Yr` : `/Mo`}
+                    </p>
+                </div>
+                )}
+            </div>
+            <div className={s.DetailsSummaryItem}>
+                <p className={s.DetailsSummaryItemLabel}>
+                    {props.plan.payYearly ? `Total (Per Year)` : `Total (Per Month)`}
+                </p>
+                <p className={s.DetailsSummaryItemFee}>$
+                    {props.total}
+                    {props.plan.payYearly ? `/Yr` : `/Mo`}
+                </p>
+            </div>
         </>
     )
 }

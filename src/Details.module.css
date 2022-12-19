@@ -220,6 +220,22 @@ input:checked + .toggle .toggle__handler {
     justify-content: space-between;
 }
 .DetailsAddsFakebox {}
+
+.DetailsSummary {
+    background:hsl(217, 100%, 97%);
+    border-radius:6px;
+    padding:25px;
+}
+
+.DetailsSummaryItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.DetailsSummaryItemLabel {
+
+}
 /* prev / next buttons */
 
 .DetailsButtons {
