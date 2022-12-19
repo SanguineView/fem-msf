@@ -11,15 +11,21 @@ function App() {
   const increseStep = () => {
     setStep(s => s + 1)
   }
-
   const decreseStep = () => {
     setStep(s => s - 1)
   }
+  const jumpStep = (step) => {
+    setStep(step)
+  }
   return (
     <div className={s.App}>
-        <Steps curStep={step} />
+        <Steps
+          curStep={step} 
+          onStepChange={jumpStep} 
+        />
         <Details
           curStep={step}
+          onStepChange={jumpStep}
           onStepIncreseClick={increseStep}
           onStepDecreseClick={decreseStep}
         />

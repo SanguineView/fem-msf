@@ -56,3 +56,13 @@
     font-family: 'ubuntuMedium';
     letter-spacing: 1px;
 }
+
+.StepItemLabel {
+    position:relative;
+    cursor:pointer;
+}
+
+.StepItemCheckbox {
+    position: absolute;
+    left: -99em;
+}

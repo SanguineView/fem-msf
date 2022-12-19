@@ -100,7 +100,7 @@ const Details = (props) => {
                 { props.curStep === 1 && <DetailPanelOne plan={plan}/> }
                 { props.curStep === 2 && <DetailPanelTwo plan={plan} onChangeYearly={handleYearlyChange} onChangeLevel={handleLevelChange}/> }
                 { props.curStep === 3 && <DetailPanelThree plan={plan} onChangeAddOnA={handleAOAChange} onChangeAddOnB={handleAOBChange} onChangeAddOnC={handleAOCChange} /> }
-                { props.curStep === 4 && <DetailPanelFour plan={plan} total={total} /> }
+                { props.curStep === 4 && <DetailPanelFour plan={plan} onStepChange={props.onStepChange} total={total} /> }
                 <div className={s.DetailsButtons}>
                     { props.curStep > 1 && <button className={s.prevButton} onClick={props.onStepDecreseClick}>Go Back</button> }
                     { props.curStep < 4 && <button className={s.nextButton} onClick={props.onStepIncreseClick}>Next Step</button> }
@@ -197,7 +197,7 @@ const DetailPanelThree = (props) => {
                         <p className={s.DetailsAddsLabel}>Online service</p>
                         <p className={s.DetailsAddsInfo}>Access to multiplayer games</p>
                     </div>
-                    <p className={s.DetailsAddsPrice}>+$1/mo</p>
+                    <p className={s.DetailsAddsPrice}>{props.plan.payYearly ? `+$10/Yr` : `+$1/Mo`}</p>
                 </div>
             </label> 
             <label className={s.DetailsAddsLabel} aria-label='Larger storage'>
@@ -208,7 +208,7 @@ const DetailPanelThree = (props) => {
                         <p className={s.DetailsAddsLabel}>Larger storage</p>
                         <p className={s.DetailsAddsInfo}>Extra 1TB of cloud save</p>
                     </div>
-                    <p className={s.DetailsAddsPrice}>+$2/mo</p>
+                    <p className={s.DetailsAddsPrice}>{props.plan.payYearly ? `+$20/Yr` : `+$2/Mo`}</p>
                 </div>
             </label>  
             <label className={s.DetailsAddsLabel} aria-label='Customizable Profile'>
@@ -219,7 +219,7 @@ const DetailPanelThree = (props) => {
                         <p className={s.DetailsAddsLabel}>Customizable Profile</p>
                         <p className={s.DetailsAddsInfo}>Custom theme on your profile</p>
                     </div>
-                    <p className={s.DetailsAddsPrice}>+$2/mo</p>
+                    <p className={s.DetailsAddsPrice}>{props.plan.payYearly ? `+$20/Yr` : `+$2/Mo`}</p>
                 </div>
             </label>
         </>
@@ -227,64 +227,65 @@ const DetailPanelThree = (props) => {
 }
 
 const DetailPanelFour = (props) => {
+    const handleClick = (e) => {
+        props.onStepChange(parseInt(e.target.value))
+    }
     return (
         <>
             <h2 className={s.DetailsHeading}>Finishing up</h2>
             <p className={s.DetailsCopy}>Double-check everything looks OK before confirming.</p>
             <div className={s.DetailsSummary}>
                 <div className={s.DetailsSummaryItem}>
-                    <p className={s.DetailsSummaryItemLabel}>
+                    <div>
+                    <p className={s.DetailsSummaryItemLevel}>
                         {props.plan.level == 1 && 'Arcade'}
                         {props.plan.level == 2 && 'Advanced'}
                         {props.plan.level == 3 && 'Pro'}
                         {props.plan.payYearly ? ` (Yearly)` : ` (Monthyly)`}
                     </p>
-                    <p className={s.DetailsSummaryItemFee}>
-                        ${props.plan.levelFee}
-                        {props.plan.payYearly ? `/Yr` : `/Mo`}</p>
+                    <button value='2' onClick={handleClick}>Change</button>
+                    </div>
+                    <p className={s.DetailsSummaryItemLevel}>
+                        {props.plan.payYearly ? `$${props.plan.levelFee * 10}/Yr` : `$${props.plan.levelFee}/Mo`}</p>
                 </div>
                 {(props.plan.addona || props.plan.addonb || props.plan.addonc) && <hr/> }
                 { props.plan.addona && (
                 <div className={s.DetailsSummaryItem}>
-                    <p className={s.DetailsSummaryItemLabel}>
+                    <p className={s.DetailsSummaryItemAddOn}>
                         {props.plan.addona && 'Online service'}
                     </p>
-                    <p className={s.DetailsSummaryItemFee}>
-                        ${props.plan.aoafee}
-                        {props.plan.payYearly ? `/Yr` : `/Mo`}
+                    <p className={s.DetailsSummaryItemAddOn}>
+                        {props.plan.payYearly ? `+$${props.plan.aoafee * 10}/Yr` : `+$${props.plan.aoafee}/Mo`}
                     </p>
                 </div>
                 )}
                 { props.plan.addonb && (
                 <div className={s.DetailsSummaryItem}>
-                    <p className={s.DetailsSummaryItemLabel}>
+                    <p className={s.DetailsSummaryItemAddOn}>
                         {props.plan.addonb && 'Larger storage'}
                     </p>
-                    <p className={s.DetailsSummaryItemFee}>
-                        ${props.plan.aobfee}
-                        {props.plan.payYearly ? `/Yr` : `/Mo`}
+                    <p className={s.DetailsSummaryItemAddOn}>
+                        {props.plan.payYearly ? `+$${props.plan.aobfee * 10}/Yr` : `+$${props.plan.aobfee}/Mo`}
                     </p>
                 </div>
                 )}
                 { props.plan.addonc && (
                 <div className={s.DetailsSummaryItem}>
-                    <p className={s.DetailsSummaryItemLabel}>
+                    <p className={s.DetailsSummaryItemAddOn}>
                         {props.plan.addonc && 'Customizable Profile'}
                     </p>
-                    <p className={s.DetailsSummaryItemFee}>
-                        ${props.plan.aocfee}
-                        {props.plan.payYearly ? `/Yr` : `/Mo`}
+                    <p className={s.DetailsSummaryItemAddOn}>
+                        {props.plan.payYearly ? `+$${props.plan.aocfee * 10}/Yr` : `+$${props.plan.aocfee}/Mo`}
                     </p>
                 </div>
                 )}
             </div>
             <div className={s.DetailsSummaryItem}>
-                <p className={s.DetailsSummaryItemLabel}>
+                <p className={s.DetailsSummaryItemTotal}>
                     {props.plan.payYearly ? `Total (Per Year)` : `Total (Per Month)`}
                 </p>
-                <p className={s.DetailsSummaryItemFee}>$
-                    {props.total}
-                    {props.plan.payYearly ? `/Yr` : `/Mo`}
+                <p className={s.DetailsSummaryItemTotal}>
+                    {props.plan.payYearly ? `$${props.total}/Yr` : `$${props.total}/Mo`}
                 </p>
             </div>
         </>

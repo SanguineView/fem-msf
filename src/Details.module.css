@@ -233,8 +233,23 @@ input:checked + .toggle .toggle__handler {
     align-items: center;
 }
 
-.DetailsSummaryItemLabel {
+.DetailsSummaryItemLevel {
+    font-family: 'ubuntuMedium';
+    font-size:16px;
+    color:hsl(213, 96%, 18%);
+}
 
+.DetailsSummaryItemAddOn,
+.DetailsSummaryTotal {
+    font-family: 'ubuntuMedium';
+    font-size:14px;
+    color:hsl(231, 11%, 63%);
+}
+
+.DetailsSummaryTotalCost {
+    font-family: 'ubuntuBold';
+    font-size:18px;
+    color:hsl(243, 100%, 62%);
 }
 /* prev / next buttons */
 
