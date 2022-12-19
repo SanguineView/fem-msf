@@ -1,14 +1,107 @@
+import { useState, useEffect } from 'react';
+
 import s from './Details.module.css'
 
 const Details = (props) => {
+    const [fees, setFees] = useState([])
+    const [plan, setPlan] = useState(
+    {
+      name:'',
+      email:'',
+      phone:'',
+      payYearly:false,
+      level:1,
+      levelFee:9,
+      addona: false,
+      aoafee: 0,
+      addonb: false,
+      aobfee: 0,
+      addonc: false,
+      aocfee: 0
+    })
 
+    useEffect(() => {
+        const fees = []
+        fees.unshift(plan.levelFee)
+        fees.unshift(plan.aoafee)
+        fees.unshift(plan.aobfee)
+        fees.unshift(plan.aocfee)
+        let newTotal = fees.reduce((a,b) => a + b, 0)
+        if (plan.payYearly) {
+            newTotal = newTotal * 10
+        }
+        console.log(`The total: ${newTotal}`)
+        setFees([...fees])
+    }, [plan])
+
+    const handleYearlyChange = () => {
+        setPlan((plan) => {
+        return {...plan, 
+        payYearly:!plan.payYearly
+        }
+        })
+    }
+
+    const handleLevelChange = (e) => {
+        let newTotal = updateTotal(parseInt(e.target.value))
+        setPlan((plan) => {
+        return {
+            ...plan,
+            level:e.target.value,
+            levelFee:newTotal
+        }
+        })
+    }
+
+    const handleAOAChange = (e) => {
+        let fee = e.target.checked ? 1 : 0
+        
+        setPlan((plan) => {
+        return {...plan, 
+        addona:!plan.addona,
+        aoafee: fee
+        }
+        })
+    }
+
+    const handleAOBChange = (e) => {
+        let fee = e.target.checked ? 2 : 0
+
+        setPlan((plan) => {
+        return {...plan, 
+        addonb:!plan.addonb,
+        aobfee: fee
+        }
+        })
+    }
+
+    const handleAOCChange = (e) => {
+        let fee = e.target.checked ? 2 : 0
+
+        setPlan((plan) => {
+        return {...plan, 
+        addonc:!plan.addonc,
+        aocfee: fee
+        }
+        })
+    }
+
+    const updateTotal = (level) => {
+        if (level === 1) {
+        return 9
+        } else if (level === 2) {
+        return 12
+        } else if (level === 3) {
+        return 15
+        }
+    }
     return (
         <>
             <div className={s.DetailsContainer}>
-                { props.curStep === 1 && <DetailPanelOne plan={props.plan}/> }
-                { props.curStep === 2 && <DetailPanelTwo plan={props.plan} onChangeYearly={props.onChangeYearly} onChangeLevel={props.onChangeLevel}/> }
-                { props.curStep === 3 && <DetailPanelThree plan={props.plan} onChangeAddOnA={props.onChangeAddOnA} onChangeAddOnB={props.onChangeAddOnB} onChangeAddOnC={props.onChangeAddOnC} /> }
-                { props.curStep === 4 && <DetailPanelFour plan={props.plan} /> }
+                { props.curStep === 1 && <DetailPanelOne plan={plan}/> }
+                { props.curStep === 2 && <DetailPanelTwo plan={plan} onChangeYearly={handleYearlyChange} onChangeLevel={handleLevelChange}/> }
+                { props.curStep === 3 && <DetailPanelThree plan={plan} onChangeAddOnA={handleAOAChange} onChangeAddOnB={handleAOBChange} onChangeAddOnC={handleAOCChange} /> }
+                { props.curStep === 4 && <DetailPanelFour plan={plan} /> }
                 <div className={s.DetailsButtons}>
                     { props.curStep > 1 && <button className={s.prevButton} onClick={props.onStepDecreseClick}>Go Back</button> }
                     { props.curStep < 4 && <button className={s.nextButton} onClick={props.onStepIncreseClick}>Next Step</button> }
@@ -100,6 +193,7 @@ const DetailPanelThree = (props) => {
             <label className={s.DetailsAddsLabel} aria-label='Online Service'>
                 <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addona' checked={props.plan.addona} onChange={props.onChangeAddOnA} />
                 <div className={s.DetailsAddsOption}> 
+                    <div className={s.DetailsAddsFakebox}>{props.plan.addona && <p>HAH!</p>}</div>
                     <div className={s.DetailsAddsSelect}>
                         <p className={s.DetailsAddsLabel}>Online service</p>
                         <p className={s.DetailsAddsInfo}>Access to multiplayer games</p>
@@ -112,6 +206,7 @@ const DetailPanelThree = (props) => {
             <label className={s.DetailsAddsLabel} aria-label='Larger storage'>
                 <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonb' checked={props.plan.addonb} onChange={props.onChangeAddOnB} />
                 <div className={s.DetailsAddsOption}>
+                    <div className={s.DetailsAddsFakebox}>{props.plan.addonb && <p>HAH!</p>}</div>
                     <div className={s.DetailsAddsSelect}>
                         <p className={s.DetailsAddsLabel}>Larger storage</p>
                         <p className={s.DetailsAddsInfo}>Extra 1TB of cloud save</p>
@@ -124,6 +219,7 @@ const DetailPanelThree = (props) => {
             <label className={s.DetailsAddsLabel} aria-label='Customizable Profile'>
                 <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonc' checked={props.plan.addonc} onChange={props.onChangeAddOnC} />
                 <div className={s.DetailsAddsOption}>
+                    <div className={s.DetailsAddsFakebox}>{props.plan.addonc && <p>HAH!</p>}</div>
                     <div className={s.DetailsAddsSelect}>
                         <p className={s.DetailsAddsLabel}>Customizable Profile</p>
                         <p className={s.DetailsAddsInfo}>Custom theme on your profile</p>

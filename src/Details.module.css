@@ -219,7 +219,7 @@ input:checked + .toggle .toggle__handler {
     align-items:center;
     justify-content: space-between;
 }
-
+.DetailsAddsFakebox {}
 /* prev / next buttons */
 
 .DetailsButtons {
