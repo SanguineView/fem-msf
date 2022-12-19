@@ -46,7 +46,7 @@ const Details = (props) => {
         setPlan((plan) => {
         return {
             ...plan,
-            level:e.target.value,
+            level:parseInt(e.target.value),
             levelFee:newTotal
         }
         })
@@ -192,7 +192,7 @@ const DetailPanelThree = (props) => {
             <label className={s.DetailsAddsLabel} aria-label='Online Service'>
                 <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addona' checked={props.plan.addona} onChange={props.onChangeAddOnA} />
                 <div className={s.DetailsAddsOption}> 
-                    <div className={s.DetailsAddsFakebox}>{props.plan.addona && <p>HAH!</p>}</div>
+                    <div className={s.DetailsAddsFakebox}>{props.plan.addona && <img src="./assets/images/icon-checkmark.svg" alt="Checkmark" className={s.DetailsAddsCheck}/> }</div>
                     <div className={s.DetailsAddsSelect}>
                         <p className={s.DetailsAddsLabel}>Online service</p>
                         <p className={s.DetailsAddsInfo}>Access to multiplayer games</p>
@@ -203,7 +203,7 @@ const DetailPanelThree = (props) => {
             <label className={s.DetailsAddsLabel} aria-label='Larger storage'>
                 <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonb' checked={props.plan.addonb} onChange={props.onChangeAddOnB} />
                 <div className={s.DetailsAddsOption}>
-                    <div className={s.DetailsAddsFakebox}>{props.plan.addonb && <p>HAH!</p>}</div>
+                    <div className={s.DetailsAddsFakebox}>{props.plan.addonb && <img src="./assets/images/icon-checkmark.svg" alt="Checkmark" className={s.DetailsAddsCheck}/> }</div>
                     <div className={s.DetailsAddsSelect}>
                         <p className={s.DetailsAddsLabel}>Larger storage</p>
                         <p className={s.DetailsAddsInfo}>Extra 1TB of cloud save</p>
@@ -214,7 +214,7 @@ const DetailPanelThree = (props) => {
             <label className={s.DetailsAddsLabel} aria-label='Customizable Profile'>
                 <input type="checkbox" className={s.DetailsAddsCheckbox} name='addOnnSelection' value='addonc' checked={props.plan.addonc} onChange={props.onChangeAddOnC} />
                 <div className={s.DetailsAddsOption}>
-                    <div className={s.DetailsAddsFakebox}>{props.plan.addonc && <p>HAH!</p>}</div>
+                    <div className={s.DetailsAddsFakebox}>{props.plan.addonc && <img src="./assets/images/icon-checkmark.svg" alt="Checkmark" className={s.DetailsAddsCheck}/> }</div>
                     <div className={s.DetailsAddsSelect}>
                         <p className={s.DetailsAddsLabel}>Customizable Profile</p>
                         <p className={s.DetailsAddsInfo}>Custom theme on your profile</p>
@@ -238,14 +238,14 @@ const DetailPanelFour = (props) => {
                 <div className={s.DetailsSummaryItem}>
                     <div>
                     <p className={s.DetailsSummaryItemLevel}>
-                        {props.plan.level == 1 && 'Arcade'}
-                        {props.plan.level == 2 && 'Advanced'}
-                        {props.plan.level == 3 && 'Pro'}
-                        {props.plan.payYearly ? ` (Yearly)` : ` (Monthyly)`}
+                        {props.plan.level === 1 && 'Arcade'}
+                        {props.plan.level === 2 && 'Advanced'}
+                        {props.plan.level === 3 && 'Pro'}
+                        {props.plan.payYearly ? ` (Yearly)` : ` (Monthly)`}
                     </p>
-                    <button value='2' onClick={handleClick}>Change</button>
+                    <button value='2' onClick={handleClick} className={s.DetailsChangeLevel}>Change</button>
                     </div>
-                    <p className={s.DetailsSummaryItemLevel}>
+                    <p className={s.DetailsSummaryItem}>
                         {props.plan.payYearly ? `$${props.plan.levelFee * 10}/Yr` : `$${props.plan.levelFee}/Mo`}</p>
                 </div>
                 {(props.plan.addona || props.plan.addonb || props.plan.addonc) && <hr/> }
@@ -254,7 +254,7 @@ const DetailPanelFour = (props) => {
                     <p className={s.DetailsSummaryItemAddOn}>
                         {props.plan.addona && 'Online service'}
                     </p>
-                    <p className={s.DetailsSummaryItemAddOn}>
+                    <p className={s.DetailsSummaryItemAddOnFee}>
                         {props.plan.payYearly ? `+$${props.plan.aoafee * 10}/Yr` : `+$${props.plan.aoafee}/Mo`}
                     </p>
                 </div>
@@ -264,7 +264,7 @@ const DetailPanelFour = (props) => {
                     <p className={s.DetailsSummaryItemAddOn}>
                         {props.plan.addonb && 'Larger storage'}
                     </p>
-                    <p className={s.DetailsSummaryItemAddOn}>
+                    <p className={s.DetailsSummaryItemAddOnFee}>
                         {props.plan.payYearly ? `+$${props.plan.aobfee * 10}/Yr` : `+$${props.plan.aobfee}/Mo`}
                     </p>
                 </div>
@@ -274,7 +274,7 @@ const DetailPanelFour = (props) => {
                     <p className={s.DetailsSummaryItemAddOn}>
                         {props.plan.addonc && 'Customizable Profile'}
                     </p>
-                    <p className={s.DetailsSummaryItemAddOn}>
+                    <p className={s.DetailsSummaryItemAddOnFee}>
                         {props.plan.payYearly ? `+$${props.plan.aocfee * 10}/Yr` : `+$${props.plan.aocfee}/Mo`}
                     </p>
                 </div>
@@ -284,7 +284,7 @@ const DetailPanelFour = (props) => {
                 <p className={s.DetailsSummaryItemTotal}>
                     {props.plan.payYearly ? `Total (Per Year)` : `Total (Per Month)`}
                 </p>
-                <p className={s.DetailsSummaryItemTotal}>
+                <p className={s.DetailsSummaryTotalCost}>
                     {props.plan.payYearly ? `$${props.total}/Yr` : `$${props.total}/Mo`}
                 </p>
             </div>

@@ -205,26 +205,74 @@ input:checked + .toggle .toggle__handler {
     border-radius: 6px;
     margin-bottom:15px;
     transition: all 0.3s ease;
+    display:flex;
+    align-items:center;
+    padding:10px;
+    gap:15px;
 }
 .DetailsAddsOption:hover {
     border-color: hsl(243, 100%, 62%);
     cursor:  pointer;
 }
-.DetailsAddsCheckbox:checked+ .DetailsAddsOption {
+.DetailsAddsCheckbox:checked + .DetailsAddsOption {
     border-color: hsl(243, 100%, 62%);
     background:hsl(217, 100%, 97%);
 }
-.DetailsAddsOption {
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
+.DetailsAddsFakebox {
+    width:20px;
+    height:20px;
+    border:1px solid hsl(213, 96%, 18%);
+    border-radius: 4px;
+    transition:all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.DetailsAddsFakebox {}
+.DetailsAddsCheckbox:checked + .DetailsAddsOption .DetailsAddsFakebox {
+    background:hsl(243, 100%, 62%);
+}
+.DetailsAddsLabel {
+    font-family: 'ubuntuMedium';
+    font-size:16px;
+    color:hsl(213, 96%, 18%);
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height:100%;
+}
+.DetailsAddsInfo,
+.DetailsAddsPrice {
+    font-family: 'ubuntuRegular';
+    font-size:14px;
+    color:hsl(231, 11%, 63%);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.DetailsAddsPrice {
+    margin-left:auto;
+    color:hsl(243, 100%, 62%);
+}
+
+/* DETAILS FINAL SUMMARY */
 
 .DetailsSummary {
     background:hsl(217, 100%, 97%);
     border-radius:6px;
     padding:25px;
+}
+
+.DetailsChangeLevel {
+    font-family:'ubuntuRegular';
+    color:hsl(231, 11%, 63%);
+    text-decoration: underline;
+    background:none;
+    border:none;
+    transition: all 0.3s ease;
+    padding-left:0;
+}
+
+.DetailsChangeLevel:hover {
+    cursor: pointer;
+    color:hsl(243, 100%, 62%);
 }
 
 .DetailsSummaryItem {
@@ -237,22 +285,29 @@ input:checked + .toggle .toggle__handler {
     font-family: 'ubuntuMedium';
     font-size:16px;
     color:hsl(213, 96%, 18%);
+    margin-bottom:0;
 }
 
 .DetailsSummaryItemAddOn,
-.DetailsSummaryTotal {
-    font-family: 'ubuntuMedium';
+.DetailsSummaryTotal,
+.DetailsSummaryItemAddOnFee,
+.DetailsSummaryItemTotal {
+    font-family: 'ubuntuRegular';
     font-size:14px;
     color:hsl(231, 11%, 63%);
 }
 
+.DetailsSummaryItemAddOnFee {
+    color:hsl(213, 96%, 18%);
+}
+
 .DetailsSummaryTotalCost {
     font-family: 'ubuntuBold';
-    font-size:18px;
+    font-size:22px;
     color:hsl(243, 100%, 62%);
 }
-/* prev / next buttons */
 
+/* prev / next buttons */
 .DetailsButtons {
     display:flex;
     justify-content: space-between;
