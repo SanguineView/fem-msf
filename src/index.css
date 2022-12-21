@@ -20,12 +20,33 @@ body {
   display:flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap:25px;
   min-height: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.attribution p {
+  font-family: 'ubuntuRegular', sans-serif;
+  font-size:14px;
+  text-align:center;
+  margin-bottom:0;
+  color:hsl(231, 11%, 63%);
+  line-height: 125%;
+}
+
+.attribution a {
+  text-decoration: none;
+  color:hsl(213, 96%, 18%);
+  transition: all 0.3s ease;
+}
+
+.attribution a:hover {
+  color: hsl(243, 100%, 62%);
 }
 
 @media (max-width:1440px) {
