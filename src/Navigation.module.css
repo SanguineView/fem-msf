@@ -1,0 +1,53 @@
+/* prev / next buttons */
+.NavButtons {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:auto;
+    margin-bottom: 15px;
+}
+
+.prevButton {
+    font-family: 'ubuntuRegular';
+    font-size:16px;
+    color:hsl(213, 96%, 18%);
+    background:none;
+    border:none;
+    transition:all 0.3s ease;
+}
+
+.prevButton:hover {
+    cursor: pointer;
+    color:hsl(243, 100%, 62%)
+}
+
+.nextButton {
+    font-family: 'ubuntuRegular';
+    font-size:16px;
+    color:hsl(231, 100%, 99%);
+    background:hsl(213, 96%, 18%);
+    padding:20px 25px;
+    border:none;
+    border-radius:6px;
+    line-height:100%;
+    letter-spacing: 0.5px;
+    transition:all 0.3s ease;
+    margin-left:auto;
+}
+
+.nextButton:hover {
+    cursor: pointer;
+    background:hsl(243, 100%, 62%)
+}
+
+@media (max-width:1440px) {
+    .NavButtons {
+        background:#fff;
+        margin-bottom: 0;
+        padding:15px;
+    }
+
+    .NavButtons.NavButtonsHide {
+        display: none;
+    }
+}

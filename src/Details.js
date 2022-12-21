@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import React from "react"
 
 import s from "./Details.module.css"
 
@@ -84,7 +83,7 @@ const Details = (props) => {
 		}
 	}
 	return (
-		<React.Fragment>
+		<>
 			<div className={s.DetailsContainer}>
 				{props.curStep === 1 && <DetailPanelOne plan={plan} />}
 				{props.curStep === 2 && (
@@ -110,25 +109,8 @@ const Details = (props) => {
 					/>
 				)}
 				{props.curStep === 5 && <DetailPanelFive />}
-				<div className={s.DetailsButtons}>
-					{props.curStep > 1 && props.curStep <= 4 && (
-						<button className={s.prevButton} onClick={props.onStepDecreseClick}>
-							Go Back
-						</button>
-					)}
-					{props.curStep < 4 && (
-						<button className={s.nextButton} onClick={props.onStepIncreseClick}>
-							Next Step
-						</button>
-					)}
-					{props.curStep === 4 && (
-						<button className={s.nextButton} onClick={props.onStepIncreseClick}>
-							Confirm
-						</button>
-					)}
-				</div>
 			</div>
-		</React.Fragment>
+		</>
 	)
 }
 
@@ -139,32 +121,32 @@ const DetailPanelOne = () => {
 			<p className={s.DetailsCopy}>
 				Please provied your name, email address, and phone number.
 			</p>
-			<div className={s.DetailsForm}>
-				<label className={s.DetailsFormLabel} htmlFor="name">
+			<div className={s.DetailsInfo}>
+				<label className={s.DetailsInfoLabel} htmlFor="name">
 					Name
 				</label>
 				<input
-					className={s.DetailsFormInput}
+					className={s.DetailsInfoInput}
 					type="text"
 					placeholder="e.g. Stephen King"
 					id="name"
 					name="name"
 				/>
-				<label className={s.DetailsFormLabel} htmlFor="emailAddress">
+				<label className={s.DetailsInfoLabel} htmlFor="emailAddress">
 					Email Address
 				</label>
 				<input
-					className={s.DetailsFormInput}
+					className={s.DetailsInfoInput}
 					type="text"
 					placeholder="e.g. stephenking@lorem.com"
 					id="emailAddress"
 					name="emailAddress"
 				/>
-				<label className={s.DetailsFormLabel} htmlFor="phoneNumber">
+				<label className={s.DetailsInfoLabel} htmlFor="phoneNumber">
 					Phone Number
 				</label>
 				<input
-					className={s.DetailsFormInput}
+					className={s.DetailsInfoInput}
 					type="text"
 					placeholder="e.g. +1 234 567 890"
 					id="phoneNumber"
@@ -197,15 +179,17 @@ const DetailPanelTwo = (props) => {
 							src="./assets/images/icon-arcade.svg"
 							alt="Arcade"
 						/>
+						<div className={s.DetailsPlanInfo}>
 						<p className={s.DetailsPlanLabel}>Arcade</p>
-						{props.plan.payYearly ? (
-							<React.Fragment>
-								<p className={s.DetailsPlanPrice}>$90/year</p>
-								<p className={s.DetailsPlanPriceNote}>2 Months Free</p>
-							</React.Fragment>
-						) : (
-							<p className={s.DetailsPlanPrice}>$9/mo</p>
-						)}
+							{props.plan.payYearly ? (
+								<>
+									<p className={s.DetailsPlanPrice}>$90/year</p>
+									<p className={s.DetailsPlanPriceNote}>2 Months Free</p>
+								</>
+							) : (
+								<p className={s.DetailsPlanPrice}>$9/mo</p>
+							)}
+						</div>
 					</div>
 				</label>
 				<label className={s.DetailsPlanCheckboxLabel} aria-label="Advanced">
@@ -222,15 +206,17 @@ const DetailPanelTwo = (props) => {
 							src="./assets/images/icon-advanced.svg"
 							alt="Advanced"
 						/>
-						<p className={s.DetailsPlanLabel}>Advanced</p>
-						{props.plan.payYearly ? (
-							<React.Fragment>
-								<p className={s.DetailsPlanPrice}>$120/year</p>
-								<p className={s.DetailsPlanPriceNote}>2 Months Free</p>
-							</React.Fragment>
-						) : (
-							<p className={s.DetailsPlanPrice}>$12/mo</p>
-						)}
+						<div className={s.DetailsPlanInfo}>
+							<p className={s.DetailsPlanLabel}>Advanced</p>
+							{props.plan.payYearly ? (
+								<>
+									<p className={s.DetailsPlanPrice}>$120/year</p>
+									<p className={s.DetailsPlanPriceNote}>2 Months Free</p>
+								</>
+							) : (
+								<p className={s.DetailsPlanPrice}>$12/mo</p>
+							)}
+						</div>
 					</div>
 				</label>
 				<label className={s.DetailsPlanCheckboxLabel} aria-label="Pro">
@@ -247,15 +233,17 @@ const DetailPanelTwo = (props) => {
 							src="./assets/images/icon-pro.svg"
 							alt="Pro"
 						/>
-						<p className={s.DetailsPlanLabel}>Pro</p>
-						{props.plan.payYearly ? (
-							<React.Fragment>
-								<p className={s.DetailsPlanPrice}>$150/year</p>
-								<p className={s.DetailsPlanPriceNote}>2 Months Free</p>
-							</React.Fragment>
-						) : (
-							<p className={s.DetailsPlanPrice}>$15/mo</p>
-						)}
+						<div className={s.DetailsPlanInfo}>
+							<p className={s.DetailsPlanLabel}>Pro</p>
+							{props.plan.payYearly ? (
+								<>
+									<p className={s.DetailsPlanPrice}>$150/year</p>
+									<p className={s.DetailsPlanPriceNote}>2 Months Free</p>
+								</>
+							) : (
+								<p className={s.DetailsPlanPrice}>$15/mo</p>
+							)}
+						</div>
 					</div>
 				</label>
 			</div>
@@ -457,13 +445,13 @@ const DetailPanelFour = (props) => {
 
 const DetailPanelFive = () => {
 	return (
-		<div className={s.DetailsPanel}>
+		<div className={`${s.DetailsPanel} ${s.DetailsPanelThanks}`}>
 			<img
 				src="./assets/images/icon-thank-you.svg"
-				className={s.DetailsThankYouImg}
+				className={s.DetailsThanksImg}
 				alt="Thank You!"
 			/>
-			<h2 className={s.DetailsHeading}>Thank You</h2>
+			<h2 className={s.DetailsHeading}>Thank You!</h2>
 			<p className={s.DetailsCopy}>
 				Thanks for confirming your subscription! We hope you have fun using our
 				platform. If you ever need support, please feel free to email us at
