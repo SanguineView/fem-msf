@@ -94,11 +94,11 @@
 }
 
 .DetailsPlanSelect:hover {
-    border-color: hsl(213, 96%, 18%)
+    border-color: hsl(243, 100%, 62%)
 }
 
 .DetailsPlanCheckbox:checked + .DetailsPlanSelect {
-    border-color: hsl(213, 96%, 18%);
+    border-color: hsl(243, 100%, 62%);
     background:hsl(231, 100%, 99%);
 }
 
@@ -358,7 +358,7 @@ hr {
 @media (max-width:1400px) {
     .DetailsContainer {
         padding:15px;
-        margin-top:-95px;
+        margin-top:-85px;
     }
 
     .DetailsHeading {

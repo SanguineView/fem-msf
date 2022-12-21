@@ -3,7 +3,7 @@
     padding:15px 100px 15px 15px;
     border-radius:14px;
     box-shadow: 5px 5px 20px hsl(231, 11%, 93%);
-    width:940px;
+    width:825px;
     display:grid;
     grid-template-columns: 275px 1fr;
     grid-column-gap: 100px;
