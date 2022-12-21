@@ -2,10 +2,10 @@ import s from './Steps.module.css'
 
 const Steps = (props) => {
     const handleChange = (e) => {
-			props.onStepChange(parseInt(e.target.value))
-		}
+        props.onStepChange(parseInt(e.target.value))
+    }
     return (
-        <div className={s.StepsContainer}>
+        <div className={props.curStep === 5 ? `${s.StepsContainer} ${s.StepsContainerDoneski}` : `${s.StepsContainer}`}>
             <label className={s.StepItemLabel} aria-label='Step 1 - Your Info'>
                 <input type="radio" className={s.StepItemCheckbox} value='1' checked={props.curStep === 1} onChange={handleChange} />
                 <div className={s.Step}>

@@ -64,6 +64,10 @@
     cursor:pointer;
 }
 
+.StepsContainer.StepsContainerDoneski .StepItemLabel {
+    cursor: default;
+}
+
 .StepItemCheckbox {
     position: absolute;
     left: -99em;
