@@ -10,12 +10,15 @@
 
 @media (max-width:1400px) {
     .App {
+        display: flex;
+        flex-direction:column;
         background:none;
-        display: block;
+        border-radius:0;
+        box-shadow: none;
         padding:0;
+        height:100vh;
         width:100%;
         max-width: 100%;
-        border-radius:0;
     }
 }
 

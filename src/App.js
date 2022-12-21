@@ -3,15 +3,16 @@ import { useState } from 'react';
 import s from './App.module.css';
 import Steps from './Steps';
 import Details from './Details'
+import Navigation from './Navigation';
 
 // const getTotal = () => {}
 
 function App() {
   const [step, setStep] = useState(1)
-  const increseStep = () => {
+  const increaseStep = () => {
     setStep(s => s + 1)
   }
-  const decreseStep = () => {
+  const decreaseStep = () => {
     setStep(s => s - 1)
   }
   const jumpStep = (newStep) => {
@@ -30,8 +31,11 @@ function App() {
         <Details
           curStep={step}
           onStepChange={jumpStep}
-          onStepIncreseClick={increseStep}
-          onStepDecreseClick={decreseStep}
+        />
+        <Navigation 
+          curStep={step}
+          onStepIncreaseClick={increaseStep}
+          onStepDecreaseClick={decreaseStep}
         />
     </div>
   );

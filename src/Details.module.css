@@ -24,25 +24,26 @@
     color:hsl(231, 11%, 63%);
     margin-top:0;
     margin-bottom: 40px;
+    line-height: 150%;
 }
 
 
 /* USER INFO ENTRY */
 
-.DetailsForm {
+.DetailsInfo {
     display:flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.DetailsFormLabel {
+.DetailsInfoLabel {
     font-family: 'ubuntuRegular';
     font-size:15px;
     color:hsl(213, 96%, 18%);
     margin-bottom:10px;
 }
 
-.DetailsFormInput {
+.DetailsInfoInput {
     font-family: 'ubuntuMedium';
     font-size:16px;
     border:1px solid hsl(231, 11%, 63%);
@@ -53,13 +54,13 @@
     color:hsl(213, 96%, 18%);
 }
 
-.DetailsFormInput::placeholder {
+.DetailsInfoInput::placeholder {
     font-family: 'ubuntuRegular';
     font-size:16px;
     color: hsl(231, 11%, 63%);
 }
 
-.DetailsFormInput:focus {
+.DetailsInfoInput:focus {
     border:1px solid hsl(243, 100%, 62%);
 }
 
@@ -337,48 +338,23 @@ hr {
     color:hsl(243, 100%, 62%);
 }
 
-/* prev / next buttons */
-.DetailsButtons {
+/* THANK YOU */
+
+.DetailsPanelThanks {
+    height:100%;
     display:flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-top:auto;
-    margin-bottom: 15px;
+    text-align: center;
+}
+.DetailsThanksImg {
+    max-width:80px;
+    margin-bottom:35px;
 }
 
-.prevButton {
-    color:hsl(213, 96%, 18%);
-    font-family: 'ubuntuRegular';
-    font-size:16px;
-    background:none;
-    border:none;
-    transition:all 0.3s ease;
+.DetailsPanelThanks .DetailsCopy {
 }
-
-.prevButton:hover {
-    cursor: pointer;
-    color:hsl(243, 100%, 62%)
-}
-
-.nextButton {
-    font-family: 'ubuntuRegular';
-    color:hsl(231, 100%, 99%);
-    font-size:16px;
-    background:hsl(213, 96%, 18%);
-    padding:20px 25px;
-    border:none;
-    border-radius:6px;
-    line-height:100%;
-    letter-spacing: 0.5px;
-    transition:all 0.3s ease;
-    margin-left:auto;
-}
-
-.nextButton:hover {
-    cursor: pointer;
-    background:hsl(243, 100%, 62%)
-}
-
 
 @media (max-width:1400px) {
     .DetailsContainer {
@@ -386,9 +362,64 @@ hr {
         margin-top:-95px;
     }
 
+    .DetailsHeading {
+        font-size: 24px;
+    }
 
     .DetailsPanel {
         padding:25px;
         border-radius:6px;
+        box-shadow: 5px 5px 20px hsl(231, 11%, 93%);
+    }
+
+    .DetailsPlanOptions {
+        display:flex;
+        flex-direction: column;
+    }
+
+    .DetailsPlanSelect {
+        display:flex;
+        align-items: flex-start;
+        gap:15px;
+    }
+
+    .DetailsPlanLabel {
+        font-size:14px;
+    }
+
+    .DetailsPlanPrice {
+        margin-bottom:10px;
+    }
+
+    .DetailsPlanIcon,
+    .DetailsPlanPrice {
+        margin:0;
+    }
+
+    .DetailsPlanPriceNote {
+        margin-top:10px;
+    }
+
+    .DetailsAddsOption {
+        padding:15px;
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
+
+    .DetailsAddsLabel {
+        font-size: 14px;
+    }
+
+    .DetailsAddsInfo {
+        font-size: 12px;
+    }
+
+    .DetailsThanksImg {
+        max-width:55px;
+    } 
+
+    .DetailsPanelThanks {
+        padding:75px 25px;
     }
 }
